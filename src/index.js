@@ -1,6 +1,6 @@
 const widgets = require('./widgets');
-const routes = require('./server/routes');
-const services = require('./server/bff');
+const routes = require('./routes');
+const services = require('./bff');
 
 module.exports = {
     featureName: 'demo-feature',
