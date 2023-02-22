@@ -1,3 +1,6 @@
+const utils = require('../common/env-utils');
+const BaseUrl = utils.readEnvValue('BASE_URL');
+
 class ApiSdk {
     constructor(contextId) {
         this.contextId = contextId;
@@ -7,3 +10,5 @@ class ApiSdk {
         return ApiHelper.get(`${BaseUrl}/api`);
     }
 }
+
+module.exports = ApiSdk;

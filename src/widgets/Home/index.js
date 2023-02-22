@@ -1,10 +1,10 @@
-const Home = () => {
-    const msg = 'hello world';
-    return (
-        <div>
-            <h1>{msg}</h1>
-        </div>
-    );
-};
+import createMobxWidget from '../../common/createMobxWidget';
+import Home from './components';
+import Store from './store';
+import StoreContext from './context';
 
-export default Home;
+export default {
+    id: 'demo-widget',
+    create: createMobxWidget(Home, Store, StoreContext),
+    renderMode: 'client'
+};
