@@ -10,7 +10,8 @@ const getConfig = () => {
             host: 'localhost',
             port: 3000
         },
-        secureCookie: false
+        secureCookie: false,
+        rootDirectory: null
     };
 
     return configInstance;

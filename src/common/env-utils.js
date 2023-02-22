@@ -7,6 +7,12 @@ const readEnvValue = (key, defaultValue) => {
     return value || defaultValue;
 };
 
+const isDevEnv = () => {
+    const nodeEnv = process.env?.NODE_ENV;
+    return nodeEnv === 'development';
+};
+
 module.exports = {
-    readEnvValue
+    readEnvValue,
+    isDevEnv
 };
