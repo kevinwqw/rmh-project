@@ -1,2 +1,2 @@
-# rrh-project
-react + redux + hapi
+# rmh-project
+react + mobx + hapi

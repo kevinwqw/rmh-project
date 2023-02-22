@@ -5,6 +5,7 @@ module.exports = {
     mode: 'development',
     cache: true,
     entry: './src/index.js',
+    externals: {},
     output: {
         path: path.join(__dirname, '/dist'),
         filename: 'bundle.js'
