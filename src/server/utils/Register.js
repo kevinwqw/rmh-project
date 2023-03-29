@@ -11,7 +11,7 @@ class Register {
         this.server = server;
     }
 
-    async registPlugins() {
+    async registerPlugins() {
         await this.server.register({ plugin: Inert, options: {} });
         await this.server.register({ plugin: H2O2, options: {} });
         await this.server.register({ plugin: Crumb, options: {} });
@@ -19,7 +19,7 @@ class Register {
         await this.server.register({ plugin: Blipp, options: {} });
     }
 
-    registRoutes(routes) {
+    registerRoutes(routes) {
         if (!routes) return;
 
         if (Array.isArray(routes)) {
@@ -31,7 +31,7 @@ class Register {
         }
     }
 
-    registServices(featureName, services) {
+    registerServices(featureName, services) {
         if (!services) return;
 
         for (const [key, serviceConfig] of Object.entries(services)) {
@@ -48,13 +48,13 @@ class Register {
         }
     }
 
-    registFeatures(features) {
+    registerFeatures(features) {
         if (!features) return;
 
         features.forEach((feature) => {
             const { name: featureName, routes, services } = feature;
-            if (routes) this.registRoutes(routes);
-            if (services) this.registServices(featureName, services);
+            if (routes) this.registerRoutes(routes);
+            if (services) this.registerServices(featureName, services);
         });
     }
 }

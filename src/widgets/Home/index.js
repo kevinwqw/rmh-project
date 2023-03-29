@@ -1,7 +1,7 @@
 import createMobxWidget from '../../common/createMobxWidget';
 import Home from './components';
 import Store from './store';
-import StoreContext from './context';
+import { StoreContext } from './context';
 
 export default {
     id: 'demo-widget',

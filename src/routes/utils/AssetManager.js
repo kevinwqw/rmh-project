@@ -30,9 +30,9 @@ class AssetManager {
     addFeatureAsset(name) {
         // Add local feature assets
         if (name === this._projectPackageName) {
-            const localFeatureSricpt = { name, file: isDev ? '/assets/bundle.js' : '/assets/bundle.min.js' };
+            const localFeatureScript = { name, file: isDev ? '/assets/bundle.js' : '/assets/bundle.min.js' };
             const localFeatureStyle = { name, file: '/assets/index.css' };
-            this._addScripts(this._featureScripts, localFeatureSricpt);
+            this._addScripts(this._featureScripts, localFeatureScript);
             this._addStyles(this._featureStyles, localFeatureStyle);
             return;
         }

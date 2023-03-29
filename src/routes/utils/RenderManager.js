@@ -1,15 +1,12 @@
 const { renderWidgets, renderWidgetToString, renderWidgetsToString } = require('./widget-helper');
 const { renderPageHtml } = require('./html-helper');
 
-const isPjaxRequest = (request) => !!(request && request.headers && request.headers['x-pjax'] === '1');
-
 class RenderManager {
     constructor(request, h, assetManager) {
         this._request = request;
         this._h = h;
         this._assetManager = assetManager;
         this._taggedWidgets = [];
-        this._pjax = isPjaxRequest(request);
         // 提供两个widget字符串渲染方法
         this.renderWidgetToString = renderWidgetToString;
         this.renderWidgetsToString = renderWidgetsToString;
@@ -32,15 +29,25 @@ class RenderManager {
         this.addWidget('singlePage', widget, args, options);
     }
 
-    _getPjaxContent(widgets) {}
-
     _getBodyHtml(widgets) {
-        const pjaxContent = this._getPjaxContent(widgets);
-        if (this._pjax) return pjaxContent;
+        if (widgets.singlePageContent && widgets.singlePageContent.length > 0) {
+            return `
+            <div class="main-body">
+                ${this.renderWidgetsToString(widgets.mainContent)}
+            </div
+            `;
+        }
 
         return `
         <div class="main-body">
-            <div id="pjax-container">${pjaxContent}</div>
+            ${widgets.header ? `<header>${this.renderWidgetsToString(widgets.header)}</header>` : ''}
+            <div id="main-container">
+                <div class="content-container">
+                    ${widgets.leftNav ? `<div class="l-nav">${this.renderWidgetsToString(widgets.leftNav)}</div>` : ''}
+                    <div class="main-content">${this.renderWidgetsToString(widgets.mainContent)}</div>
+                    ${widgets.rightNav ? `<div class="r-nav">${this.renderWidgetsToString(widgets.rightNav)}</div>` : ''}
+                </div>
+            </div>
         </div>`;
     }
 
@@ -53,9 +60,6 @@ class RenderManager {
                 bodyHtml: this._getBodyHtml(renderedWidgets),
                 scriptsUrls: this._assetManager.getScriptsUrls()
             };
-
-            if (this._pjax) return this._h.response(data).type('application/json');
-
             const html = renderPageHtml(this._request, pageData);
             return this._h.response(html);
         } catch (err) {

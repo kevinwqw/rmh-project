@@ -4,7 +4,4 @@ const StoreContext = React.createContext();
 
 const useStore = () => React.useContext(StoreContext);
 
-export default {
-    StoreContext,
-    useStore
-};
+export { StoreContext, useStore };

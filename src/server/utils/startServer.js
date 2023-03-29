@@ -1,5 +1,5 @@
 const Hapi = require('@hapi/hapi');
-const Register = require('./Regiser');
+const Register = require('./Register');
 const { getConfig } = require('../config');
 const { initCache } = require('./cache');
 
@@ -26,9 +26,9 @@ const startServer = async ({ pre, post }, customConfig) => {
     if (pre) await pre(server);
 
     const register = new Register(server);
-    register.registPlugins();
-    // Regist feature routes and services
-    register.registFeatures();
+    register.registerPlugins();
+    // Register feature routes and services
+    register.registerFeatures();
 
     //启动server
     try {
